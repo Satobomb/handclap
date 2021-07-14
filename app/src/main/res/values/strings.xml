@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">5回先取じゃんけん</string>
+    <string name="win_text">勝ち</string>
+    <string name="lose_text">負け</string>
+    <string name="gu_text">グー</string>
+    <string name="choki_text">チョキ</string>
+    <string name="pa_text">パー</string>
+    <string name="reset_text">最初からやりなおす</string>
+    <string name="yourHand_text">あなた</string>
+    <string name="androidHand_text">相手</string>
+</resources>
