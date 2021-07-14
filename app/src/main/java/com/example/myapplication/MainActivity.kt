@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     private var gameStart = false
 
     /**
-     * アクティビティ生成時の処理aa
+     * アクティビティ生成時の処理
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
