@@ -7,43 +7,43 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/winText"
+        android:id="@+id/YourChargeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginLeft="68dp"
         android:layout_marginTop="16dp"
-        android:text="@string/win_text"
+        android:text="@string/your_charge_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/loseText"
+        android:id="@+id/AndroidChargeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
-        android:text="@string/lose_text"
+        android:text="@string/android_charge_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/guBtn"
+        android:id="@+id/chBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="100dp"
-        android:text="@string/gu_text"
+        android:text="@string/charge_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/chokiBtn"
+        android:id="@+id/atBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -51,20 +51,20 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="30dp"
-        android:text="@string/choki_text"
+        android:text="@string/attack_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/resetBtn"
-        app:layout_constraintEnd_toStartOf="@+id/paBtn"
-        app:layout_constraintStart_toEndOf="@+id/guBtn" />
+        app:layout_constraintEnd_toStartOf="@+id/diBtn"
+        app:layout_constraintStart_toEndOf="@+id/chBtn" />
 
     <Button
-        android:id="@+id/paBtn"
+        android:id="@+id/diBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="100dp"
-        android:text="@string/pa_text"
+        android:text="@string/diffense_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -88,10 +88,10 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/guBtn"
+        app:layout_constraintBottom_toTopOf="@+id/chBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winText"
-        app:srcCompat="@drawable/janken_gu" />
+        app:layout_constraintTop_toBottomOf="@+id/YourChargeText"
+        app:srcCompat="@drawable/diffense" />
 
     <ImageView
         android:id="@+id/droidHandImage"
@@ -100,11 +100,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/paBtn"
+        app:layout_constraintBottom_toTopOf="@+id/diBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/yourHandImage"
-        app:layout_constraintTop_toBottomOf="@+id/loseText"
-        app:srcCompat="@drawable/janken_gu" />
+        app:layout_constraintTop_toBottomOf="@+id/AndroidChargeText"
+        app:srcCompat="@drawable/diffense" />
 
     <TextView
         android:id="@+id/resultText"

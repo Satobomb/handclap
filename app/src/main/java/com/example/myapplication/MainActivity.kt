@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private var yourHand = 0
     private var droidHand = 0
-    private var winCount = 0
-    private var loseCount = 0
+    private var YourChargeCount = 0
+    private var DroidChargeCount = 0
     private var gameStart = false
 
     /**
@@ -19,21 +19,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        guBtn.setOnClickListener{
-            if(gameStart) {
-                yourHand = 0
-                compareHand()
-            }
-        }
-
-        chokiBtn.setOnClickListener{
+        chBtn.setOnClickListener{
             if(gameStart) {
                 yourHand = 1
                 compareHand()
             }
         }
 
-        paBtn.setOnClickListener{
+        atBtn.setOnClickListener{
+            if(gameStart) {
+                yourHand = 0
+                compareHand()
+            }
+        }
+
+        diBtn.setOnClickListener{
             if(gameStart) {
                 yourHand = 2
                 compareHand()
@@ -50,16 +50,18 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onResume() {
         super.onResume()
-        winCount = 0
-        loseCount = 0
-        winText.text = getString(R.string.win_text)
-        loseText.text = getString(R.string.lose_text)
-        resultText.text = "じゃんけん"
+        YourChargeCount = 0
+        DroidChargeCount = 0
+        YourChargeText.text = getString(R.string.your_charge_text)
+        AndroidChargeText.text = getString(R.string.android_charge_text)
+        resultText.text = "せーの！"
 
         // ゲーム開始状態にする
         gameStart = true
         // リセットボタンを非表示
         resetBtn.visibility = View.INVISIBLE
+        // 攻撃ボタンを非表示
+        atBtn.visibility = View.INVISIBLE
 
     }
 
@@ -69,73 +71,93 @@ class MainActivity : AppCompatActivity() {
     private fun compareHand(){
         resultText.text = "ぽん！"
         // CPUの手をランダムで決定
-        droidHand = (0..2).random()
+        if(DroidChargeCount >= 1){
+            // 攻撃 or 溜め or 防御
+            droidHand = (0..2).random()
+        }else{
+            // 溜め or 防御
+            droidHand = (1..2).random()
+        }
         // 画面にイメージを表示する
         showHand()
 
         when(yourHand){
-            // グー
-            0 -> {
-                if(droidHand == 0){
-                    // do nothing
-                }else if(droidHand == 1){
-                    winCount++
-                    winText.text = getString(R.string.win_text) + winCount
-                }else if(droidHand == 2){
-                    loseCount++
-                    loseText.text = getString(R.string.lose_text) + loseCount
-                }
-            }
-            // チョキ
+            // 溜める
             1 -> {
+                YourChargeCount++
+                YourChargeText.text = getString(R.string.charge_text) + YourChargeCount
                 if(droidHand == 0){
-                    loseCount++
-                    loseText.text = getString(R.string.lose_text) + loseCount
+                    resultText.text = "あなたの負けです・・・"
+                    gameStart = false
+                    resetBtn.visibility = View.VISIBLE
                 }else if(droidHand == 1){
-                    // do nothing
+                    DroidChargeCount++
+                    AndroidChargeText.text = getString(R.string.android_charge_text) + DroidChargeCount
                 }else if(droidHand == 2){
-                    winCount++
-                    winText.text = getString(R.string.win_text) + winCount
+                    // do nothing
                 }
             }
-            // パー
+            // 攻撃
+            0 -> {
+                YourChargeCount--
+                YourChargeText.text = getString(R.string.charge_text) + YourChargeCount
+                if(droidHand == 0){
+                    DroidChargeCount--
+                    AndroidChargeText.text = getString(R.string.android_charge_text) + DroidChargeCount
+                }else if(droidHand == 1){
+                    resultText.text = "あなたの勝ちです！"
+                    gameStart = false
+                    resetBtn.visibility = View.VISIBLE
+                }else if(droidHand == 2){
+                    // do nothing
+                }
+            }
+            // 防御
             2 -> {
                 if(droidHand == 0){
-                    winCount++
-                    winText.text = getString(R.string.win_text) + winCount
+                    DroidChargeCount--
+                    AndroidChargeText.text = getString(R.string.android_charge_text) + DroidChargeCount
                 }else if(droidHand == 1){
-                    loseCount++
-                    loseText.text = getString(R.string.lose_text) + loseCount
+                    DroidChargeCount++
+                    AndroidChargeText.text = getString(R.string.android_charge_text) + DroidChargeCount
                 }else if(droidHand == 2){
                     // do nothing
                 }
             }
         }
 
-        if(winCount == 5){
-            resultText.text = "あなたの勝ちです！"
-            gameStart = false
-            resetBtn.visibility = View.VISIBLE
-        }else if(loseCount == 5){
-            resultText.text = "あなたの負けです・・・"
-            gameStart = false
-            resetBtn.visibility = View.VISIBLE
+        if(YourChargeCount >= 1){
+            atBtn.visibility = View.VISIBLE
         }else{
-            // do nothing
+            atBtn.visibility = View.INVISIBLE
         }
+
+        /**
+        if(winCount == 5){
+        resultText.text = "あなたの勝ちです！"
+        gameStart = false
+        resetBtn.visibility = View.VISIBLE
+        }else if(loseCount == 5){
+        resultText.text = "あなたの負けです・・・"
+        gameStart = false
+        resetBtn.visibility = View.VISIBLE
+        }else{
+        // do nothing
+        }
+         */
     }
 
     private fun showHand(){
         when(yourHand){
-            0 -> yourHandImage.setImageResource(R.drawable.janken_gu)
-            1 -> yourHandImage.setImageResource(R.drawable.janken_choki)
-            2 -> yourHandImage.setImageResource(R.drawable.janken_pa)
+            0 -> yourHandImage.setImageResource(R.drawable.attack)
+            1 -> yourHandImage.setImageResource(R.drawable.charge)
+            2 -> yourHandImage.setImageResource(R.drawable.diffense)
         }
 
         when(droidHand){
-            0 -> droidHandImage.setImageResource(R.drawable.janken_gu)
-            1 -> droidHandImage.setImageResource(R.drawable.janken_choki)
-            2 -> droidHandImage.setImageResource(R.drawable.janken_pa)
+            0 -> droidHandImage.setImageResource(R.drawable.attack)
+            1 -> droidHandImage.setImageResource(R.drawable.charge)
+            2 -> droidHandImage.setImageResource(R.drawable.diffense)
         }
     }
 }
