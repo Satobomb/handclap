@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private var YourChargeCount = 0
     private var DroidChargeCount = 0
     private var gameStart = false
+    private var firstFlag = 1
 
     /**
      * アクティビティ生成時の処理
@@ -75,12 +76,27 @@ class MainActivity : AppCompatActivity() {
         resultText.text = "ぽん！"
         // CPUの手をランダムで決定
         if(DroidChargeCount >= 1){
-            // 攻撃 or 溜め or 防御
-            droidHand = (0..2).random()
+            if(YourChargeCount <= 0){
+                // 攻撃　or 溜め
+                droidHand = (0..1).random()
+            }else{
+                // 攻撃 or 溜め or 防御
+                droidHand = (0..2).random()
+            }
         }else{
-            // 溜め or 防御
-            droidHand = (1..2).random()
+            if(firstFlag == 1){
+                // 溜め
+                droidHand = 1
+                firstFlag = 0
+            }else if(YourChargeCount <= 0) {
+                // 溜め
+                droidHand = 1
+            }else{
+                // 溜め or 防御
+                droidHand = (1..2).random()
+            }
         }
+
         // 画面にイメージを表示する
         showHand()
 
