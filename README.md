@@ -1,3 +1,4 @@
-# handclap
-グループでのゲーム作成  
-Android Application
+# Handclap
+グループでのゲーム作成
+
+アンドロイドアプリ
